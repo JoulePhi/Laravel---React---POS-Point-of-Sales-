@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base{
+
+
+    h1{
+        font-family: Poppins;
+        font-weight: bold;
+    }
+    h4{
+        font-family: Poppins;
+        font-weight: 500;
+    }
+    p{
+        font-family: Nunito;
+        font-weight: 600;
+    }
+
+}
