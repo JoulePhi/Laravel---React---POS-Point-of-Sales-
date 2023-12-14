@@ -1,14 +1,13 @@
 import SideBar from "@/Components/Sidebar";
-
+import DetailBar from "@/Components/DetailBar";
 
 export default function MainLayout({ children }) {
     return (
         <>
-            <div className="flex">
+            <div className="flex h-screen justify-between">
                 <SideBar />
-                <div className="flex-1">
-                    <main className="bg-bg h-full pl-48">{children}</main>
-                </div>
+                <main className="bg-bg grow overflow-y-auto p-6 scrollbar-hide">{children}</main>
+                <DetailBar />
             </div>
         </>
     );

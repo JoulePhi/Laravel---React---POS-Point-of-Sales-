@@ -27,6 +27,7 @@ export default {
                 brownText: '#2F1B14',
                 grayText: '#707278',
                 grayButton: '#F4F4F4',
+                
             }
         },
     },

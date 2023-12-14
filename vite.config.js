@@ -11,4 +11,8 @@ export default defineConfig({
         }),
         react(),
     ],
+    optimizeDeps: [
+        'react-toastify',
+        'react-spinners'
+    ]
 });

@@ -5,7 +5,7 @@ import DetailCard from '@/Components/DetailCard';
 export default function DetailBar() {
     return (
         <>
-            <div className='w-1/4 bg-white h-full fixed right-0 ml-10 overflow-y-auto px-10 py-6 scrollbar-hide shadow-lg'>
+            <div className='w-1/4 bg-white h-full flex-shrink-0 overflow-y-auto px-10 py-6 scrollbar-hide shadow-lg'>
                 <div className='flex flex-col'>
                     <div className='flex justify-between items-center mb-12'>
                         <div className='flex'>

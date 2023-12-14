@@ -13,7 +13,7 @@ export default function SideBar() {
     return (
         <>
 
-            <div className="w-24 h-full bg-white text-white p-4 flex flex-col overflow-hidden fixed">
+            <div className="flex-shrink-0 h-full w-24 bg-white p-4">
                 <div className="flex items-center justify-between h-16">
                     <div className="mx-auto bg-lightOrange p-4 mt-10 rounded-2xl">
                         <img src={icon} alt="" />
@@ -29,7 +29,7 @@ export default function SideBar() {
                     <Link href="/likes"><img src={love} alt="" /></Link>
                 </div>
                 <div className="mx-auto mt-20 w-8">
-                    <Link href="/settings"><img src={gear} alt="" /></Link>
+                    <Link href="/settings"><img src={route().current('settings') ? gearS : gear} alt="" /></Link>
                 </div>
             </div>
         </>
