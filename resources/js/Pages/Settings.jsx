@@ -25,7 +25,7 @@ export default function Settings({ categories, products }) {
                     <ChartOne />
                     <ChartTwo />
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8 mb-6">
+                <div className="mt-4 flex gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8 mb-6">
                     <ProductTable products={products} />
                     <CategryTable categories={categories} />
                 </div>

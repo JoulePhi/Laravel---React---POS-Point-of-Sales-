@@ -1,27 +1,29 @@
 import Main from '@/Layouts/Main';
 import { Head } from "@inertiajs/react";
 import TextField from '@/Components/Forms/TextField';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ScaleLoader } from 'react-spinners';
-export default function Category() {
+import File from '@/Components/Forms/File';
+export default function Category({ category }) {
     const name = useRef('');
+    const image = useRef();
     const [isLoading, setIsLoading] = useState(false);
-    const [buttonText, setButtonText] = useState("Add");
-    const override = {
-        display: "block",
-        margin: "0 auto",
-        borderColor: "red",
-    };
+    useEffect(() => {
+        if (category !== undefined) {
+            name.current.value = category.name;
+        }
+    }, [])
     const addCategory = () => {
         setIsLoading(true)
+        const formData = new FormData();
+        formData.append('name', name.current.value);
+        formData.append('image', image.current.files[0]);
         axios.post(
-            route('admin.category'),
-            {
-                name: name.current.value
-            }
+            category === undefined ? route('admin.category') : route('admin.category.edit', category.id),
+            formData
         ).then(function (response) {
             console.log(response);
             toast.success('Category successfully saved!', {
@@ -34,9 +36,12 @@ export default function Category() {
                 progress: undefined,
                 theme: "light",
             });
-            name.current.value = "";
+            if (category === undefined) {
+                name.current.value = "";
+            }
             setIsLoading(false)
         }).catch(function (error) {
+            console.log(error);
             toast.error('Category already exist', {
                 position: "top-right",
                 autoClose: 2000,
@@ -69,9 +74,12 @@ export default function Category() {
             />
             <Main>
                 <h1 className='text-2xl mb-6'>Add Product</h1>
-                <TextField data={name} label='Name' />
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <TextField data={name} label='Name' />
+                    <File data={image} />
+                </div>
                 <div className='flex justify-end'>
-                    <button className='py-4 text-white bg-orange rounded-full w-1/4 mb-10 mt-4 text-base border border-orange hover:bg-lightOrange hover:text-orange' onClick={() => addCategory()} disabled={isLoading}>{isLoading ? <ScaleLoader color="#704332" height={20} /> : 'Add'}</button>
+                    <button className='py-4 text-white bg-orange rounded-full w-1/4 mb-10 mt-4 text-base border border-orange hover:bg-lightOrange hover:text-orange' onClick={() => addCategory()} disabled={isLoading}>{isLoading ? <ScaleLoader color="#704332" height={20} /> : (category === undefined ? 'Add' : 'Save')}</button>
                 </div>
             </Main>
         </>

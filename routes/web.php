@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Application;
@@ -18,9 +19,6 @@ use Inertia\Inertia;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
     Route::get('/reports', function () {
         return Inertia::render('Reports');
     })->name('reports');
@@ -28,15 +26,23 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Dashboard');
     })->name('likes');
 
-
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard.index');
+    });
 
 
     Route::controller(SettingController::class)->group(function () {
         Route::get('/settings', 'index')->name('settings');
-        Route::post('/settings/category', 'addCategory')->name('admin.category');
         Route::post('/settings/product', 'addProduct')->name('admin.product');
-        Route::get('/settings/category', 'indexCategory')->name('admin.category.index');
         Route::get('/settings/product', 'indexProduct')->name('admin.product.index');
+        Route::post('/settings/product/{id}', 'editProduct')->name('admin.product.edit');
+        Route::get('/settings/product/{id}', 'indexProduct')->name('admin.product.edit');
+        Route::delete('/settings/product/{id}', 'deleteProduct')->name('admin.product.delete');
+        Route::post('/settings/category', 'addCategory')->name('admin.category');
+        Route::get('/settings/category', 'indexCategory')->name('admin.category.index');
+        Route::get('/settings/category/{id}', 'indexCategory')->name('admin.category.edit');
+        Route::post('/settings/category/{id}', 'editCategory')->name('admin.category.edit');
+        Route::delete('/settings/category/{id}', 'deleteProduct')->name('admin.category.delete');
     });
 });
 require base_path('routes/auth.php');

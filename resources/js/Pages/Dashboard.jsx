@@ -1,24 +1,32 @@
 import Main from '@/Layouts/Main';
 import { Head } from '@inertiajs/react';
-import SearchBar from '@/Components/SearchBar';
+import CategoryCard from '@/Components/CategoryCard';
+import { useEffect, useRef, useState } from 'react';
+import ProductCard from '@/Components/ProductCard';
 import coffee from '@/Assets/coffee-cup.png';
 import soda from '@/Assets/soda.png';
 import milk from '@/Assets/milk.png';
 import boba from '@/Assets/boba.png';
 import ice from '@/Assets/icecream.png';
 import dessert from '@/Assets/dessert.png';
-import CategoryCard from '@/Components/CategoryCard';
-import { useRef, useState } from 'react';
-import ProductCard from '@/Components/ProductCard';
-import DetailBar from '@/Components/DetailBar';
+export default function Dashboard({ auth, categories }) {
 
-export default function Dashboard({ auth }) {
-
-    const [isSelected, setIsSelected] = useState(1)
-
+    const [isSelected, setIsSelected] = useState(categories[0].id)
+    const [categoriesCard, setCategoriesCard] = useState([])
     const changeSelected = (id) => {
         setIsSelected(id)
+        console.log({ id: id })
+        console.log({ isSelected: isSelected })
+
     }
+
+    useEffect(() => {
+        setCategoriesCard([]);
+        categories?.map((e, i) => {
+            setCategoriesCard((state) => [...state, <CategoryCard key={i} img={`storage/images/${e.image}`} title={e.name} id={e.id} isSelected={isSelected} onClick={changeSelected} />])
+        })
+    }, [])
+
 
     return (
         <Main>
