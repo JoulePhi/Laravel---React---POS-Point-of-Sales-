@@ -1,22 +1,31 @@
 
-import coffeeglass from '@/Assets/coffee.jpg';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Dialog from '@/Components/Dialog';
 
 
+export default function ProductCard({ product, addCart }) {
 
-export default function ProductCard() {
+    const [selectedSugar, setSelectedSugar] = useState(3)
+    const [selectedIce, setSelectedIce] = useState(3)
+    const [showDialog, setShowDialog] = useState(false)
+    const total = useRef(1)
+    const closeDialog = () => {
+        setShowDialog(false)
+    }
 
-    const [selectedSugar, setSelectedSugar] = useState(1)
-    const [selectedIce, setSelectedIce] = useState(1)
+    const triggerDialog = () => {
+        setShowDialog(true)
+    }
     return (
         <>
+            {showDialog ? <Dialog closeDialog={closeDialog} data={total} onSave={() => { closeDialog(); addCart(product, total.current.value) }} /> : null}
             <div className='bg-white flex justify-center rounded-2xl flex-col p-6 shadow-md grow-0'>
-                <div className='flex'>
-                    <img src={coffeeglass} alt="" className='h-36 w-32 object-cover rounded-2xl mr-6' />
+                <div className='flex '>
+                    <img src={`storage/images/${product.image}`} alt="" className='h-36 w-36 object-cover  rounded-2xl mr-6' />
                     <div className='flex-col flex justify-between'>
-                        <h4 className='text-black text-lg'>Americano Passion Coffee</h4>
-                        <p className='text-grayText text-base'>Coffee americano passion 2 shot caramel sauce</p>
-                        <h1 className='text-2xl'>$ 5,30</h1>
+                        <h4 className='text-black text-lg'>{product.name}</h4>
+                        <p className='text-grayText text-base line-clamp-2'>{product.description}</p>
+                        <h1 className='text-2xl'>$ {product.price}</h1>
                     </div>
                 </div>
                 <div className='flex mt-6 justify-between'>
@@ -50,7 +59,7 @@ export default function ProductCard() {
                         </div>
                     </div>
                 </div>
-                <button className='mt-9 text-base bg-orange py-4 rounded-full font-poppins border border-orange text-white hover:bg-lightOrange  hover:border-orange hover:text-orange'>Add To Billing</button>
+                <button className='mt-9 text-base bg-orange py-4 rounded-full font-poppins border border-orange text-white hover:bg-lightOrange  hover:border-orange hover:text-orange' onClick={() => triggerDialog()}>Add To Billing</button>
             </div>
         </>
     );

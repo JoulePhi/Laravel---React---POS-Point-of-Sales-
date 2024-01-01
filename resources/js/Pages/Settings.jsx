@@ -4,7 +4,7 @@ import CardThree from "@/Components/CardThree";
 import CardFour from "@/Components/CardFour";
 import ChartOne from "@/Components/ChartOne";
 import ChartTwo from "@/Components/ChartTwo";
-import Main from '@/Layouts/Main';
+import Main from '@/Layouts/MainLayout';
 import { Head } from "@inertiajs/react";
 import ProductTable from "@/Components/ProductTable";
 import CategryTable from "@/Components/CategoryTable";

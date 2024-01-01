@@ -20,13 +20,13 @@ export default function SideBar() {
                     </div>
                 </div>
                 <div className="mx-auto mt-28 w-8">
-                    <Link href="/dashboard"><img src={route().current('dashboard') ? homeS : home} alt="" /></Link>
+                    <Link href="/dashboard"><img src={route().current('dashboard.index') ? homeS : home} alt="" /></Link>
                 </div>
                 <div className="mx-auto mt-20 w-8">
-                    <Link href="/reports"><img src={route().current('reports') ? noteS : note} alt="" /></Link>
+                    <Link href="/queues"><img src={route().current('queues.index') ? noteS : note} alt="" /></Link>
                 </div>
                 <div className="mx-auto mt-20 w-8">
-                    <Link href="/likes"><img src={love} alt="" /></Link>
+                    <Link href="/orders"><img src={route().current('order.index') ? loveS : love} alt="" /></Link>
                 </div>
                 <div className="mx-auto mt-20 w-8">
                     <Link href="/settings"><img src={route().current('settings') ? gearS : gear} alt="" /></Link>

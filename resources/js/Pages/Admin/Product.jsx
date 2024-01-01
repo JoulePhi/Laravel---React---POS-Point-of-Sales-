@@ -1,5 +1,5 @@
 
-import Main from '@/Layouts/Main';
+import Main from '@/Layouts/DashboardLayout';
 import { Head } from "@inertiajs/react";
 import TextField from '@/Components/Forms/TextField';
 import Dropdown from '@/Components/Forms/Dropdown';
